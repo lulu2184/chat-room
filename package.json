@@ -1,0 +1,11 @@
+{
+  "name": "chat-room",
+  "version": "1.0.0",
+  "description": "A web based chat room.",
+  "main": "app.js",
+  "scripts": {
+    "test": "test"
+  },
+  "author": "Lu Liu",
+  "license": ""
+}
