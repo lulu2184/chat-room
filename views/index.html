@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-COMPATIBLE" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <title></title>
+</head>
+<body>
+    <div class="main-container">
+        <h1 class="cover-heading">Welcome to Orb Chat Room</h1>
+        <label class="sr-only">Username</label>
+        <input type="text" id="username" class="form-control" placeholder="username" required autofocus>
+        <label class="sr-only">Password</label>
+        <input type="password" id="password" class="form-control" placeholder="password">
+        <div class="checkbox">
+            <label>
+                <input type="checkbox" value="remember-me"> Remember me
+            </label>
+        </div>
+        <button id="btn-login" class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+        <button id="register" class="btn btn-lg btn-primary btn-block" type="button">Register</button>
+    </div>
+
+    <script src="javascripts/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $("#register").click(function(){
+                window.location.assign("/register")
+            });
+            $("#btn-login").click(function(){
+                var postBody = {username: $("#username").val(), password: $("#password").val()};
+                console.log(JSON.stringify(postBody));
+                $.ajax({
+                    type: "POST",
+                    url: "/login",
+                    contentType: "application/json",
+                    data: JSON.stringify(postBody),
+                    success: function(data) {
+                        alert("login operation succeed. data msg: " + JSON.stringify(data));
+                    }
+                });
+            })
+        })
+    </script>
+</body>
+</html>
