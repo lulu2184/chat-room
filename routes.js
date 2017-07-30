@@ -1,7 +1,8 @@
 var routes = require('./controllers');
-var login = require('./controllers/login');
 
-module.exports = function(app) {
+module.exports = function(app, dbConnection) {
     app.get('/', routes.index);
-    app.post('/login', login.loginHandler);
+
+    var loginHandler = require('./controllers/login')(dbConnection);
+    app.post('/login', loginHandler.post);
 };
