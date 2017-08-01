@@ -7,22 +7,29 @@
 
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/login.css" rel="stylesheet">
     <title></title>
 </head>
 <body>
     <div class="main-container">
-        <h1 class="cover-heading">Welcome to Orb Chat Room</h1>
-        <label class="sr-only">Username</label>
-        <input type="text" id="username" class="form-control" placeholder="username" required autofocus>
-        <label class="sr-only">Password</label>
-        <input type="password" id="password" class="form-control" placeholder="password">
-        <div class="checkbox">
-            <label>
-                <input type="checkbox" value="remember-me"> Remember me
-            </label>
-        </div>
-        <button id="btn-login" class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-        <button id="register" class="btn btn-lg btn-primary btn-block" type="button">Register</button>
+        <h3 class="signin-heading">Sign in to Orb Chat Room</h3>
+        <form class="form-signin">
+            <div id="username-field" class="form-body">
+                <label for="username">Username</label>
+                <input type="text" id="username" class="form-control" placeholder="username" required autofocus>
+            </div>
+            <div id="password-field" class="form-body">
+                <label for="password">Password</label>
+                <input type="password" id="password" class="form-control" placeholder="password">
+            </div>
+            <div class="form-body">
+                <button id="btn-login" class="btn btn-lg btn-primary" type="submit">Sign in</button>
+            </div>
+        </form>
+        <p class="register-callout form-body">
+            New to Orb Chat Room?
+            <a href="register.html">Create an account.</a>
+        </p>
     </div>
 
     <script src="javascripts/jquery.min.js"></script>

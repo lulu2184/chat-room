@@ -1,0 +1,39 @@
+body {
+    padding-top: 40px;
+    padding-bottom: 40px;
+    background-color: #eee;
+}
+
+.main-container {
+    width: 350px;
+    margin: 0 auto;
+}
+
+.form-body{
+    padding: 5px;
+}
+
+.form-signin {
+    max-width: 370px;
+    padding: 10px;
+    margin: 15px;
+    border: 1px solid #d8dee2;
+    border-radius: 10px;
+}
+
+.btn-lg {
+    margin-top: 15px;
+    width: 100%;
+}
+
+.signin-heading {
+    text-align: center;
+}
+
+.register-callout {
+    max-width: 330px;
+    padding: 20px;
+    margin: 15px;
+    border: 1px solid #d8dee2;
+    border-radius: 10px;
+}
