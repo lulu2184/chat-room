@@ -28,16 +28,13 @@
         </form>
         <p class="register-callout form-body">
             New to Orb Chat Room?
-            <a href="register.html">Create an account.</a>
+            <a href="/register">Create an account.</a>
         </p>
     </div>
 
     <script src="javascripts/jquery.min.js"></script>
     <script>
         $(document).ready(function(){
-            $("#register").click(function(){
-                window.location.assign("/register")
-            });
             $("#btn-login").click(function(){
                 var postBody = {username: $("#username").val(), password: $("#password").val()};
                 console.log(JSON.stringify(postBody));

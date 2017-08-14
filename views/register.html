@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-COMPATIBLE" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/login.css" rel="stylesheet">
+    <title></title>
+</head>
+<body>
+<div class="main-container">
+    <h3 class="signin-heading">Sign in to Orb Chat Room</h3>
+    <form class="form-signin">
+        <div id="username-field" class="form-body">
+            <label for="username">Username</label>
+            <input type="text" id="username" class="form-control" placeholder="username" required autofocus>
+        </div>
+        <div id="email-field" class="form-body">
+            <label for="email">Email</label>
+            <input type="text" id="email" class="form-control" placeholder="email">
+        </div>
+        <div id="password-field" class="form-body">
+            <label for="password">Password</label>
+            <input type="password" id="password" class="form-control" placeholder="password">
+        </div>
+        <div class="form-body">
+            <button id="btn-reg" class="btn btn-lg btn-primary" type="submit">Sign up</button>
+        </div>
+    </form>
+    <p class="register-callout form-body">
+        Have an acount?
+        <a href="/index">Sign in.</a>
+    </p>
+</div>
+
+<script src="javascripts/jquery.min.js"></script>
+<script>
+    $(document).ready(function(){
+        $("#btn-reg").click(function(){
+            var postBody = {
+                username: $("#username").val(),
+                email: $("#email").val(),
+                password: $("#password").val()
+            };
+            console.log(JSON.stringify(postBody));
+            $.ajax({
+                type: "POST",
+                url: "/register",
+                contentType: "application/json",
+                data: JSON.stringify(postBody),
+                success: function (data) {
+                    alert("registration operation succeed. data msg: " + JSON.stringify(data));
+                }
+            });
+        })
+    })
+</script>
+</body>
+</html>
