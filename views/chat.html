@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <title>Orb Chat Room</title>
+    <meta http-equiv="X-UA-COMPATIBLE" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/chat.css" rel="stylesheet">
+</head>
+<body>
+    <div class="col-lg-1 col-md-1 col-xs-1 col-sm-1"></div>
+    <div id="main-container" class="col-lg-10 col-md-10 col-xs-10 col-sm-10">
+        <div class="row">
+            <nav id="nav-bar" class="navbar navbar-inverse col-lg-12 col-md-12 col-xs-12 col-sm-12">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#">Welcome to Orb Chat Room</a>
+                </div>
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <div id="username">User Name</div>
+                    </li>
+                    <li class="active">
+                        <a href="">Log out</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+        <div id="bottom-container" class="row">
+            <div id="message-box" class="pre-scrollable well well-lg col-lg-12 col-md-12 col-xs-12 col-sm-12">
+                <h4>Panel Content</h4>
+                <h4>Panel Content</h4>
+            </div>
+        </div>
+        <div class="row">
+            <form action="">
+                <div id="input-container" class="col-lg-10 col-md-10 col-xs-10 col-sm-10">
+                    <input type="text" id="input-box" class="form-control" autocomplete="off">
+                </div>
+                <button type="button" id="send-button" class="btn btn-primary col-lg-2 col-md-2 col-xs-2 col-sm-2">Post</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="javascripts/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+           $("#send-button").click(function(){
+               $.ajax({
+                   type: "POST",
+                   url: "sendmsg",
+                   contentType: "application/json",
+                   data: JSON.stringfy({msg: $("#input-box").val()}),
+                   success: function(data) {
+
+                   }
+               });
+           });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,24 @@
+#nav-bar {
+    margin-bottom: 0;
+}
+
+#message-box {
+    height: 500px;
+}
+
+#send-button {
+    float: right;
+}
+
+#username {
+    color: #9d9d9d;
+    position: relative;
+    display: block;
+    padding: 15px 15px;
+    background-color: transparent;
+}
+
+#input-container {
+    padding-left: 0;
+}
+
