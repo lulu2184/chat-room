@@ -19,10 +19,10 @@
                 </div>
                 <ul class="nav navbar-nav navbar-right">
                     <li>
-                        <div id="username">User Name</div>
+                        <div id="username"></div>
                     </li>
                     <li class="active">
-                        <a href="">Log out</a>
+                        <a href="logout">Log out</a>
                     </li>
                 </ul>
             </nav>
@@ -66,19 +66,21 @@
     <script src="javascripts/jquery.min.js"></script>
     <script src="javascripts/bootstrap.min.js"></script>
     <script>
+        document.getElementById("username").innerHTML = "<%= username %>";
         $(document).ready(function(){
-           $("#send-button").click(function(){
-               $.ajax({
-                   type: "POST",
-                   url: "sendmsg",
-                   contentType: "application/json",
-                   data: JSON.stringfy({msg: $("#input-box").val()}),
-                   success: function(data) {
+            $("#send-button").click(function(){
+                $.ajax({
+                    type: "POST",
+                    url: "sendmsg",
+                    contentType: "application/json",
+                    data: JSON.stringfy({msg: $("#input-box").val()}),
+                    success: function(data) {
 
                    }
                });
-           });
+            });
         });
+
     </script>
 </body>
 </html>

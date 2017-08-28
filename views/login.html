@@ -8,7 +8,7 @@
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/login.css" rel="stylesheet">
-    <title></title>
+    <title>Orb Chat Room</title>
 </head>
 <body>
     <div class="main-container">
@@ -30,25 +30,59 @@
             New to Orb Chat Room?
             <a href="/register">Create an account.</a>
         </p>
+
+        <!-- Modal for login failed -->
+        <div id="failure-modal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Login Failed.</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p id="failure-message">text</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script src="javascripts/jquery.min.js"></script>
+    <script src="javascripts/bootstrap.min.js"></script>
     <script>
         $(document).ready(function(){
             $("#btn-login").click(function(){
                 var postBody = {username: $("#username").val(), password: $("#password").val()};
                 console.log(JSON.stringify(postBody));
+                event.preventDefault();
                 $.ajax({
                     type: "POST",
                     url: "/login",
                     contentType: "application/json",
                     data: JSON.stringify(postBody),
-                    success: function(data) {
-                        alert("login operation succeed. data msg: " + JSON.stringify(data));
+                    success: function(data, status) {
+                        if (status == 'success') {
+                            if (data.success) {
+                                location.reload();
+                            } else {
+                                console.log(data.msg);
+                                document.getElementById("failure-message").innerHTML = data.msg;
+                                $("#failure-modal").modal();
+                            }
+                        }
+                    },
+
+                    error: function(data, status) {
+                        document.getElementById("failure-message").innerHTML = "Internal error appears. We are sorry for that.";
+                        $("#failure-modal").modal();
                     }
                 });
-            })
-        })
+
+            });
+        });
     </script>
 </body>
 </html>

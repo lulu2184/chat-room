@@ -13,8 +13,10 @@ module.exports = function(dbConnection) {
                     res.json({success: false, msg: 'User not found.'});
                 else if (result[0].password != req.body.password)
                     res.json({success: false, msg: 'Password not correct.'});
-                else
+                else {
+                    req.session.user = req.body.username;
                     res.json({success: true, msg: 'success'});
+                }
             });
         }
     };

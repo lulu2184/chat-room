@@ -11,52 +11,85 @@
     <title></title>
 </head>
 <body>
-<div class="main-container">
-    <h3 class="signin-heading">Sign in to Orb Chat Room</h3>
-    <form class="form-signin">
-        <div id="username-field" class="form-body">
-            <label for="username">Username</label>
-            <input type="text" id="username" class="form-control" placeholder="username" required autofocus>
-        </div>
-        <div id="email-field" class="form-body">
-            <label for="email">Email</label>
-            <input type="text" id="email" class="form-control" placeholder="email">
-        </div>
-        <div id="password-field" class="form-body">
-            <label for="password">Password</label>
-            <input type="password" id="password" class="form-control" placeholder="password">
-        </div>
-        <div class="form-body">
-            <button id="btn-reg" class="btn btn-lg btn-primary" type="submit">Sign up</button>
-        </div>
-    </form>
-    <p class="register-callout form-body">
-        Have an acount?
-        <a href="/index">Sign in.</a>
-    </p>
-</div>
+    <div class="main-container">
+        <h3 class="signin-heading">Sign in to Orb Chat Room</h3>
+        <form class="form-signin">
+            <div id="username-field" class="form-body">
+                <label for="username">Username</label>
+                <input type="text" id="username" class="form-control" placeholder="username" required autofocus>
+            </div>
+            <div id="email-field" class="form-body">
+                <label for="email">Email</label>
+                <input type="text" id="email" class="form-control" placeholder="email">
+            </div>
+            <div id="password-field" class="form-body">
+                <label for="password">Password</label>
+                <input type="password" id="password" class="form-control" placeholder="password">
+            </div>
+            <div class="form-body">
+                <button id="btn-reg" class="btn btn-lg btn-primary" type="submit">Sign up</button>
+            </div>
+        </form>
+        <p class="register-callout form-body">
+            Have an acount?
+            <a href="/">Sign in.</a>
+        </p>
 
-<script src="javascripts/jquery.min.js"></script>
-<script>
-    $(document).ready(function(){
-        $("#btn-reg").click(function(){
-            var postBody = {
-                username: $("#username").val(),
-                email: $("#email").val(),
-                password: $("#password").val()
-            };
-            console.log(JSON.stringify(postBody));
-            $.ajax({
-                type: "POST",
-                url: "/register",
-                contentType: "application/json",
-                data: JSON.stringify(postBody),
-                success: function (data) {
-                    alert("registration operation succeed. data msg: " + JSON.stringify(data));
-                }
-            });
+        <!-- Modal for login failed -->
+        <div id="failure-modal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Registration Failed.</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p id="failure-message"></p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="javascripts/jquery.min.js"></script>
+    <script src="javascripts/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $("#btn-reg").click(function(){
+                var postBody = {
+                    username: $("#username").val(),
+                    email: $("#email").val(),
+                    password: $("#password").val()
+                };
+                console.log(JSON.stringify(postBody));
+                event.preventDefault();
+                $.ajax({
+                    type: "POST",
+                    url: "/register",
+                    contentType: "application/json",
+                    data: JSON.stringify(postBody),
+                    success: function(data, status) {
+                        if (status == 'success') {
+                            if (data.success) {
+                                location.href = '/';
+                            } else {
+                                console.log(data.msg);
+                                document.getElementById("failure-message").innerHTML = data.msg;
+                                $("#failure-modal").modal();
+                            }
+                        }
+                    },
+
+                    error: function(data, status) {
+                        document.getElementById("failure-message").innerHTML = "Internal error appears. We are sorry for that.";
+                        $("#failure-modal").modal();
+                    }
+                });
+            })
         })
-    })
-</script>
+    </script>
 </body>
 </html>

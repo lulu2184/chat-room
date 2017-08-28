@@ -14,6 +14,9 @@ module.exports = function(dbConnection) {
                 console.log(JSON.stringify(result));
                 if (result.affectedRows == 0) {
                     res.json({success: false, msg: 'Username is already taken.'});
+                } else {
+                    req.session.user = req.body.username;
+                    res.json({success: true, msg: 'Successfully signed up.'});
                 }
             });
         }

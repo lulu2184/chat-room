@@ -5,6 +5,7 @@ var http = require('http');
 var express = require('express');
 var sql = require('mysql');
 var app = express();
+var session = require('express-session');
 
 // setup view engine
 app.set('views', path.join(__dirname, 'views'));
@@ -15,6 +16,11 @@ app.use(express.static('public'));
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+
+app.use(session({
+    secret: 'aljialdsjfan.ajfsdf',
+    cookie: { maxAge: 60 * 1000 }
+}));
 
 //database connection configuration
 var dbConfig = {
