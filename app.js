@@ -19,7 +19,7 @@ app.use(bodyParser.json());
 
 app.use(session({
     secret: 'aljialdsjfan.ajfsdf',
-    cookie: { maxAge: 60 * 1000 }
+    cookie: { maxAge: 60 * 60 * 30 }
 }));
 
 //database connection configuration
