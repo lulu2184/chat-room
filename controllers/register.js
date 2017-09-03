@@ -11,7 +11,6 @@ module.exports = function(dbConnection) {
             console.log(query);
             dbConnection.query(query, function(err, result){
                 if (err) throw err;
-                console.log(JSON.stringify(result));
                 if (result.affectedRows == 0) {
                     res.json({success: false, msg: 'Username is already taken.'});
                 } else {

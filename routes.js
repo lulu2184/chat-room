@@ -1,8 +1,9 @@
-module.exports = function(app, dbConnection) {
+module.exports = function(app, dbConnection, io) {
     app.get('/', function(req, res) {
         console.log('session: ' + req.session.user);
         if (req.session.user != undefined) {
             res.render('chat', {username: req.session.user});
+            //io.emit('username', { name: req.session.user });
         } else {
             res.render('login');
         }
@@ -21,5 +22,8 @@ module.exports = function(app, dbConnection) {
     app.get('/logout', function(req, res) {
         req.session.user = undefined;
         res.redirect('/');
-    })
+    });
+
+    var historyHandler = require('./controllers/history')(dbConnection);
+    app.post('/get_history', historyHandler.post);
 };

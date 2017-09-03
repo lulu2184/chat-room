@@ -29,27 +29,9 @@
         </div>
         <div id="bottom-container" class="row">
             <div id="message-box" class="pre-scrollable well well-lg col-lg-12 col-md-12 col-xs-12 col-sm-12">
-                <div class="row">
+                <div id="history-row" class="row">
                     <div class="col-lg-4 col-md-4 col-xs-4 col-sm-4"></div>
-                    <button type="button" class="btn btn-default col-lg-4 col-md-4 col-xs-4 col-sm-4">View past 15 messages</button>
-                </div>
-                <div class="chat-body">
-                    <div class="header">
-                        <strong class="primary-font">Lu Liu</strong>
-                        <small class="time-text text-muted">
-                            2017-08-26 04:23
-                        </small>
-                    </div>
-                    <p>Hello Messages.</p>
-                </div>
-                <div class="chat-body">
-                    <div class="header">
-                        <strong class="primary-font">Lu Liu</strong>
-                        <small class="time-text text-muted">
-                            2017-08-26 04:23
-                        </small>
-                    </div>
-                    <p>Hello Messages.</p>
+                    <button id="btn-history" onclick="viewHistory()" type="button" class="btn btn-default col-lg-4 col-md-4 col-xs-4 col-sm-4">View past 15 messages</button>
                 </div>
             </div>
         </div>
@@ -58,29 +40,17 @@
                 <div id="input-container" class="col-lg-10 col-md-10 col-xs-10 col-sm-10">
                     <input type="text" id="input-box" class="form-control" autocomplete="off">
                 </div>
-                <button type="button" id="send-button" class="btn btn-primary col-lg-2 col-md-2 col-xs-2 col-sm-2">Post</button>
+                <button type="button" id="send-button" onclick="sendMsg()" class="btn btn-primary col-lg-2 col-md-2 col-xs-2 col-sm-2">Post</button>
             </form>
         </div>
     </div>
 
-    <script src="javascripts/jquery.min.js"></script>
-    <script src="javascripts/bootstrap.min.js"></script>
     <script>
         document.getElementById("username").innerHTML = "<%= username %>";
-        $(document).ready(function(){
-            $("#send-button").click(function(){
-                $.ajax({
-                    type: "POST",
-                    url: "sendmsg",
-                    contentType: "application/json",
-                    data: JSON.stringfy({msg: $("#input-box").val()}),
-                    success: function(data) {
-
-                   }
-               });
-            });
-        });
-
     </script>
+    <script src="javascripts/jquery.min.js"></script>
+    <script src="javascripts/bootstrap.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="javascripts/chat_client.js"></script>
 </body>
 </html>
